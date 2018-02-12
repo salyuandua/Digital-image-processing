@@ -1,0 +1,344 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>ass2</title><meta name="generator" content="MATLAB 9.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-02-07"><meta name="DC.source" content="ass2.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="comment">% Xuejian Li           Lab2</span>
+food=imread(<span class="string">'Food.jpg'</span>);<span class="comment">%range 90-138</span>
+<span class="comment">%------------------problem 1-------------------</span>
+<span class="comment">%</span>
+[scaledFood,k,b]=Scaling(food,[0 255]);
+
+disp(<span class="string">'------Finish Solving Problem 1------'</span>);
+pause();
+<span class="comment">% %------------------problem 2---------------------</span>
+  matScaledFood=imadjust(food,[double(min(food(:)))/255 double(max(food(:)))/255],[0 1]);
+  figure;
+  subplot(1,2,1),imshow(scaledFood),title(<span class="string">'My result'</span>);
+  subplot(1,2,2),imshow(matScaledFood),title(<span class="string">'Matlab result'</span>);
+  disp(<span class="string">'------Finish Solving Problem 2------'</span>);
+  pause();
+<span class="comment">% %------------problem 3-----------------</span>
+ [food_histogram,food_nor_histogram]=CalHist(scaledFood);
+ [food_histogram_mat,food_nor_histogram_mat]=CalHist(matScaledFood);
+ figure;
+ subplot(1,2,1),bar(food_nor_histogram),title(<span class="string">'My result'</span>);
+ subplot(1,2,2),bar(food_nor_histogram_mat),title(<span class="string">'Matlab result'</span>);
+ disp(<span class="string">'------Finish Solving Problem 3------'</span>);
+ pause();
+<span class="comment">%--------------problem 4-----------------</span>
+[equalizedFood, transFunc]=HistEqualization(food,255);
+disp(<span class="string">'------Finish Solving Problem 4------'</span>);
+pause();
+<span class="comment">%---------------problem 5------------------</span>
+[equalizedFood_mat,transFunc_mat]=histeq(food);
+figure;
+subplot(1,2,1),imshow(equalizedFood),title(<span class="string">'My equalized image'</span>);
+subplot(1,2,2),imshow(equalizedFood_mat),title(<span class="string">'Matlab equalized image'</span>);
+<span class="comment">%plot transformation function</span>
+X=linspace(0,255,256);
+figure;
+subplot(1,3,1),plot(X,transFunc),title(<span class="string">'Trans function'</span>);
+subplot(1,3,2),plot(X,transFunc_mat),title(<span class="string">'Trans function Matlab'</span>);
+scaling_Y=X.*k+b;
+subplot(1,3,3),plot(X,scaling_Y),title(<span class="string">'Trans function rescaling'</span>);
+disp(<span class="string">'------Finish Solving Problem 5------'</span>);
+pause();
+<span class="comment">%---------------------problem 6---------------------</span>
+tic;
+[equalizedFood, transFunc]=HistEqualization(food,255);
+end_time=toc;
+fprintf(<span class="string">'Time cost for my HistEqualiztion is %f\n'</span>,end_time);
+[equalizedFood_mat,transFunc_mat]=histeq(food);
+end_time_mat=toc;
+fprintf(<span class="string">'Time cost for histeq is %f\n'</span>,end_time_mat);
+disp(<span class="string">'------Finish Solving Problem 6------'</span>);
+pause();
+<span class="comment">%-----------------------problem 7-------------------------</span>
+
+
+
+
+<span class="comment">%--------------------------------function area--------------------------</span>
+<span class="comment">%function to equalize histogram</span>
+<span class="keyword">function</span>[enhancedIm, transFunc] = HistEqualization(inputIm, level)
+min_pix=double(min(inputIm(:)));
+level=level+1;
+transFunc=zeros(1,level);
+[row,col]=size(inputIm);
+n=row*col;
+sum=0;
+<span class="keyword">for</span> i=min_pix:level
+   pfk =size(inputIm(inputIm==i),1)./n;
+   sum=sum+pfk;
+   gl=round((level-1)*sum);
+   transFunc(i)=gl;
+
+<span class="keyword">end</span>
+transFunc=uint8(transFunc);
+<span class="comment">%enhance image</span>
+enhancedIm=inputIm;
+<span class="keyword">for</span> i=1:row
+ <span class="keyword">for</span> j=1:col
+ enhancedIm(i,j)=transFunc(inputIm(i,j));
+ <span class="keyword">end</span>
+<span class="keyword">end</span>
+<span class="keyword">end</span>
+
+
+<span class="comment">%function to compute histogram and normalized hisogram for an image</span>
+<span class="keyword">function</span> [histogram,nor_histogram]=CalHist(org_image)
+max_pixel=max(org_image(:));
+histogram=zeros(max_pixel,1);
+nor_histogram=zeros(max_pixel,1);
+[row,col]=size(org_image);
+<span class="comment">%total elements number in orginial image</span>
+n=row.*col;
+<span class="comment">%compute hisogram and normalized hisgram</span>
+<span class="keyword">for</span> i=0:max_pixel
+    n_k=sum(sum(org_image==i));
+    histogram(i+1)=n_k;
+    nor_histogram(i+1)=n_k./n;
+<span class="keyword">end</span>
+
+
+
+<span class="keyword">end</span>
+
+
+<span class="comment">% rescale function</span>
+<span class="keyword">function</span> [scaledIm,k,b] = Scaling(inputIm, range)
+<span class="comment">%check grey image</span>
+[row,col,color_channel]=size(inputIm);
+ <span class="keyword">if</span> color_channel&gt;1
+     error(<span class="string">'Input Image is not grey'</span>);
+ <span class="keyword">end</span>
+<span class="keyword">if</span> size(range)~=2
+    error(<span class="string">'The size of range should be 2'</span>);
+<span class="keyword">end</span>
+old_min=min(inputIm(:));
+old_max=max(inputIm(:));
+new_min=range(1);
+new_max=range(2);
+<span class="comment">%valid range</span>
+<span class="keyword">if</span> new_min&lt;0 || new_max&gt;255 || new_max&lt;new_min
+error(<span class="string">'Please enter valided range!'</span>);
+<span class="keyword">end</span>
+<span class="comment">%mapping with linear function scaledIm=k*inputIm+b where k is slope, b is</span>
+<span class="comment">%distance from 0 to intersaction point.</span>
+<span class="comment">%k=(new_max-new_min)/(old_max-old_min) and b=new_min-k*old_min</span>
+k=(new_max-new_min)./double(old_max-old_min);
+<span class="comment">%fprintf('k is %d',k);</span>
+b=new_min-k*double(old_min);
+<span class="comment">%fprintf('b is %d',b);</span>
+scaledIm=k.*double(inputIm)+b;
+scaledIm=uint8(scaledIm);
+
+<span class="keyword">end</span>
+</pre><pre class="codeoutput">------Finish Solving Problem 1------
+------Finish Solving Problem 2------
+------Finish Solving Problem 3------
+------Finish Solving Problem 4------
+------Finish Solving Problem 5------
+Time cost for my HistEqualiztion is 0.257609
+Time cost for histeq is 0.259682
+------Finish Solving Problem 6------
+</pre><img vspace="5" hspace="5" src="ass2_01.png" alt=""> <img vspace="5" hspace="5" src="ass2_02.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+% Xuejian Li           Lab2
+food=imread('Food.jpg');%range 90-138
+%REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHproblem 1REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-
+% 
+[scaledFood,k,b]=Scaling(food,[0 255]);
+
+disp('REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHFinish Solving Problem 1REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH');
+pause();
+% %REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHproblem 2REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-
+  matScaledFood=imadjust(food,[double(min(food(:)))/255 double(max(food(:)))/255],[0 1]);
+  figure;
+  subplot(1,2,1),imshow(scaledFood),title('My result');
+  subplot(1,2,2),imshow(matScaledFood),title('Matlab result');
+  disp('REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHFinish Solving Problem 2REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH');
+  pause();
+% %REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHproblem 3REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-
+ [food_histogram,food_nor_histogram]=CalHist(scaledFood);
+ [food_histogram_mat,food_nor_histogram_mat]=CalHist(matScaledFood);
+ figure;
+ subplot(1,2,1),bar(food_nor_histogram),title('My result');
+ subplot(1,2,2),bar(food_nor_histogram_mat),title('Matlab result');
+ disp('REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHFinish Solving Problem 3REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH');
+ pause();
+%REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHproblem 4REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-
+[equalizedFood, transFunc]=HistEqualization(food,255);
+disp('REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHFinish Solving Problem 4REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH');
+pause();
+%REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-problem 5REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+[equalizedFood_mat,transFunc_mat]=histeq(food);
+figure;
+subplot(1,2,1),imshow(equalizedFood),title('My equalized image');
+subplot(1,2,2),imshow(equalizedFood_mat),title('Matlab equalized image');
+%plot transformation function
+X=linspace(0,255,256);
+figure;
+subplot(1,3,1),plot(X,transFunc),title('Trans function');
+subplot(1,3,2),plot(X,transFunc_mat),title('Trans function Matlab');
+scaling_Y=X.*k+b;
+subplot(1,3,3),plot(X,scaling_Y),title('Trans function rescaling');
+disp('REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHFinish Solving Problem 5REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH');
+pause();
+%REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-problem 6REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-
+tic;
+[equalizedFood, transFunc]=HistEqualization(food,255);
+end_time=toc;
+fprintf('Time cost for my HistEqualiztion is %f\n',end_time);
+[equalizedFood_mat,transFunc_mat]=histeq(food);
+end_time_mat=toc;
+fprintf('Time cost for histeq is %f\n',end_time_mat);
+disp('REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHFinish Solving Problem 6REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH');
+pause();
+%REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-problem 7REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-
+
+
+
+
+%REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHfunction areaREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+%function to equalize histogram
+function[enhancedIm, transFunc] = HistEqualization(inputIm, level)
+min_pix=double(min(inputIm(:)));
+level=level+1;
+transFunc=zeros(1,level);
+[row,col]=size(inputIm);
+n=row*col;
+sum=0;
+for i=min_pix:level
+   pfk =size(inputIm(inputIm==i),1)./n;
+   sum=sum+pfk; 
+   gl=round((level-1)*sum);
+   transFunc(i)=gl;
+    
+end
+transFunc=uint8(transFunc);
+%enhance image
+enhancedIm=inputIm;
+for i=1:row
+ for j=1:col
+ enhancedIm(i,j)=transFunc(inputIm(i,j));
+ end
+end
+end
+
+
+%function to compute histogram and normalized hisogram for an image
+function [histogram,nor_histogram]=CalHist(org_image)
+max_pixel=max(org_image(:));
+histogram=zeros(max_pixel,1);
+nor_histogram=zeros(max_pixel,1);
+[row,col]=size(org_image);
+%total elements number in orginial image
+n=row.*col;
+%compute hisogram and normalized hisgram
+for i=0:max_pixel 
+    n_k=sum(sum(org_image==i));
+    histogram(i+1)=n_k;
+    nor_histogram(i+1)=n_k./n;
+end
+
+
+
+end
+
+
+% rescale function
+function [scaledIm,k,b] = Scaling(inputIm, range)
+%check grey image
+[row,col,color_channel]=size(inputIm);
+ if color_channel>1
+     error('Input Image is not grey');
+ end
+if size(range)~=2
+    error('The size of range should be 2');
+end
+old_min=min(inputIm(:));
+old_max=max(inputIm(:));
+new_min=range(1);
+new_max=range(2);
+%valid range
+if new_min<0 || new_max>255 || new_max<new_min
+error('Please enter valided range!');
+end
+%mapping with linear function scaledIm=k*inputIm+b where k is slope, b is
+%distance from 0 to intersaction point.
+%k=(new_max-new_min)/(old_max-old_min) and b=new_min-k*old_min
+k=(new_max-new_min)./double(old_max-old_min);
+%fprintf('k is %d',k);
+b=new_min-k*double(old_min);
+%fprintf('b is %d',b);
+scaledIm=k.*double(inputIm)+b;
+scaledIm=uint8(scaledIm);
+
+end
+##### SOURCE END #####
+--></body></html>

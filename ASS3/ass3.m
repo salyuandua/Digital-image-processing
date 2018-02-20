@@ -1,3 +1,4 @@
+% Xuejian Li           Lab3
 %-----------------problem 1-----------------------
 circuit=imread('Circuit.jpg');
 %weighted 3*3 mask
@@ -29,8 +30,23 @@ disp('------Finish Solving Problem 2------');
 pause();
 %-------------------------------problem 3--------------------------------
 moon=imread('Moon.jpg');
-
-
+% filtered_moon=locallapfilt(moon,0.4,0.5);
+% imshow(filtered_moon);
+%filter image
+h=fspecial('laplacian',0);
+filtered_moon=imfilter(moon,h);
+%scaling filtered moon
+scalling_filtered_moon=imadjust(filtered_moon);
+%enhance moon
+enhanced_moon=moon-filtered_moon;
+%show images
+figure;
+subplot(2,2,1),imshow(moon),title('Orginial image');
+subplot(2,2,2),imshow(filtered_moon),title('Filtered image');
+subplot(2,2,3),imshow(scalling_filtered_moon),title('Scaled filtered image');
+subplot(2,2,4),imshow(enhanced_moon),title('Enhanced image');
+disp('------Finish Solving Problem 3------');
+pause();
 %--------------------------------functions area----------------------------
 
 %------------function of average filter
@@ -45,9 +61,9 @@ if mod(mask_row,2)==0
     error('The dimension must be odd');
 end
 %mask must be sysmtric around the center 
-% if mask~=mask'
-%     error('Mask must be ');
-% end
+ if ~isequal(mask,mask')
+     error('Mask must be sysmtric');
+ end
 %implementing average filter
 padding_im=double(im);
 [im_row,im_col]=size(im);

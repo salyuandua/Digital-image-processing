@@ -1,0 +1,4 @@
+LAB 2: 
+Apply median filter on median.jpg
+Apply Laplacian filter on lesa
+Apply Gradient operator on lesa. 
